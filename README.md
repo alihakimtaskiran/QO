@@ -5,9 +5,8 @@ Quantum Optic Simulator
 QO----|
       |-------Photon(wavelenght,location,direction)---|
       |                                               |---evolve_time(seconds)
-      |                                               |---get_location()
-      |                                               |---get_direction()
-      |                                               |---get_wavelenght()
+      |                                               |---info()
       |
-      |
+      |-------Beam(photonos)--------|
+      |                             |---info()
 </pre>
