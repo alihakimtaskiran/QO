@@ -24,9 +24,29 @@ class Photon(object):
     
 class Beam(object):
     def __init__(self,Photons):
-        self.__photons=np.array(Photons)
         if not type(Photons) in (tuple,list):
             raise TypeError("Photons must be in a tuple or list")
+        self.__photons=np.array(Photons)
 
     def info(self):
         return self.__photons
+    
+    def evolve_time(self,seconds):
+        for i in range(self.__photons.shape[0]):
+            self.__photons[i].evolve_time(seconds)
+        del i
+        
+        
+class LASER(object):
+    def __init__(self,λ,location,direction,intensity):
+        if not type(intensity)==int:
+            raise TypeError("intensity must be an integer")
+        else:
+            intensity=int(intensity)
+        __x=[]
+        for i in range(intensity):
+            __x.append(Photon(λ,location,direction))
+        self.__beam=Beam(__x)
+        del __x,i
+    def fire(self):
+        return self.__beam
