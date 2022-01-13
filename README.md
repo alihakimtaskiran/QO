@@ -1,22 +1,13 @@
 # QO
 Quantum Optic Simulator
+
+It renders Photons Fields. You can add monochromatic sources and observe it through the space
 <h2>1.1 Tree</h2>
 <pre>
-|----Photon(object)----|
-|                      |---__init__(λ,location,direction,polarization=(1,0))
-|                      |---evolve_time(seconds,n=1,epsilon=8.8541878128e-12)
-|                      |---destroy()
-|                      |---info()
-|
-|
-|----Beam(object)------|
-|                      |---__init__(Photons)
-|                      |---info()
-|                      |---evolve_time(seconds,n=1,epsilon=8.8541878128e-12)
-|
-|
-|----LASER(object)-----|
-                       |---__init__(λ,location,direction,intensity)
-                       |---fire()
+|----PhotonField(object)----|
+                            |--- __init__(dim)
+                            |---shine(self,location,presence,amplitude, frequency, phase=0)
+                            |---observeC(self,location,moment)
+
 
 </pre>
