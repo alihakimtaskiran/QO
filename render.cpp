@@ -71,24 +71,8 @@ while(getline(io,line)){
         }
         
     }
-        double start;
-    string __="";
-    for(unsigned short int xi=commas[dim]+1 ;xi<commas[dim+1];xi++){
-        __+=line[xi];
-        
-    }
-    start=stof(__);
-    double end;
-     __="";
-    for(unsigned short int xi=commas[dim+1]+1 ;xi<commas[dim+2];xi++){
-        __+=line[xi];
-        
-    }
-    end=stof(__);
-
- if(start<=observer_l[0]<=end){
-     double source_l[dim];
-         __="";
+         double source_l[dim];
+         string __="";
          for(unsigned short int j=0;j<commas[1];j++){
              __+=line[j];
          }
@@ -110,6 +94,23 @@ for(unsigned short int c=0;c<dim;c++){
     r+=pow((observer_l[c]-source_l[c]),2);
 }
 r=sqrt(r);
+        double start;
+     __="";
+    for(unsigned short int xi=commas[dim]+1 ;xi<commas[dim+1];xi++){
+        __+=line[xi];
+        
+    }
+    start=stof(__)+r/c;//r+c is delay for propogation
+    double end;
+     __="";
+    for(unsigned short int xi=commas[dim+1]+1 ;xi<commas[dim+2];xi++){
+        __+=line[xi];
+        
+    }
+    end=stof(__)+r/c;
+
+ if(start<=observer_l[0]<=end){
+
 unsigned short int i=0;
 double wave[3];//amplitude, frequency, phase
 for(unsigned short int j=dim+2;j<dim+5;j++){
