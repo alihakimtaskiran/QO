@@ -1,6 +1,16 @@
-import QO
-a=QO.PhotonField(2) #Create a 2D field
-for i in range(1000):
-    a.shine((5.6,78.6),(0,4),3.5,5.694848383,i) #Add light sources with various phases
+from QO import *
+import matplotlib.pyplot as plt
+Continumm=Field(3)          
+S_1=Shiny((0,0,1),(0,1),1,5.45e+14)
+S_2=Shiny((0,2,2),(0,1),1,5.45e+14)
 
-b=a.observeC((0,1), 2) #observe the light
+Continumm.add((S_1,S_2))
+
+observers=[]
+pix=1e-6
+for i in range(-250,250):
+    for j in range(-250,250):
+        observers.append((i*pix,j*pix,0))
+        
+im=np.array(Continumm.observe(observers,.5))
+plt.imshow(im.reshape((500,500)),cmap="Greens")
