@@ -5,10 +5,12 @@ Light... The most exciting part of the existance... We have various models to ex
 <h2>1.1 Tree</h2>
 <pre>
 |----PhotonField(object)----|
-                            |--- __init__(dim)
-                            |---add(content)
-                            |---observe(locations, moment)
-
+|                           |--- __init__(dim)
+|                           |---add(content)
+|                           |---observe(locations, moment)
+|
+|----Shiny(object)----------|
+                            |---__init__(location, presence, amplitude, frequency, phase=0)
 
 </pre>
 <h2>How to Install</h2>
