@@ -6,8 +6,8 @@ Light... The most exciting part of the existance... We have various models to ex
 <pre>
 |----PhotonField(object)----|
                             |--- __init__(dim)
-                            |---shine(location,presence,amplitude, frequency, phase=0)
-                            |---observeC(location,moment)
+                            |---add(content)
+                            |---observe(locations, moment)
 
 
 </pre>
