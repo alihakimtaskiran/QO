@@ -1,143 +1,146 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <sstream>
-#include <cmath>
+#include<fstream>
+#include<cmath>
+#include<string>
 using namespace std;
-static unsigned int c=299792458;
+static float c=299792458;
+static double PI_2M=2*M_PI;
 
-void print(float inner){
-    cout<<inner<<endl;
-}
-void print(string inner){
-    cout<<inner<<endl;
-}
+int main()
+{
+    fstream io;
+    string read;
 
-int main(){
+    io.open("MemoriesWillNeverFade/meta.wm");
+    getline(io,read);
+    static uint8_t dim=stoi(read);
+    getline(io,read);
+    static uint32_t n_glimmers=stoi(read);
+    getline(io,read);
+    double t=stod(read);
+    getline(io,read);
+    static uint32_t n_observers=stoi(read);
+    io.close();
 
-fstream io;
-io.open("observer.cw");
-unsigned short int dim;
-double r_val;
-string line;
-while(getline(io,line)){
-    dim=int(line[0])-48;
-}
-io.close();
-double observer_l[dim+1];
-io.open("observer.cw");
+    double wave_info[n_glimmers][3];//amplitude, frequency, phase
 
 
-while(getline(io,line)){
+    io.open("MemoriesWillNeverFade/amplitudes.wm");
+    for(uint32_t i=0;i<n_glimmers;i++)
+    {
+        getline(io,read);
+        wave_info[i][0]=stod(read);
+    }
+     io.close();
 
-    unsigned short int commas[dim+2];
-    unsigned short int len=line.length();
-    commas[dim+1]=len;
-    unsigned short int in=0;
-    for(unsigned short int i=0;i<len;i++){
-        if(line[i]==','){
-            commas[in]=i;
-            in++;
+    io.open("MemoriesWillNeverFade/frequencies.wm");
+    for(uint32_t i=0;i<n_glimmers;i++)
+    {
+        getline(io,read);
+        wave_info[i][1]=stod(read);
+    }
+     io.close();
 
+    io.open("MemoriesWillNeverFade/phases.wm");
+    for(uint32_t i=0;i<n_glimmers;i++)
+    {
+        getline(io,read);
+        wave_info[i][2]=stod(read);
+    }
+     io.close();
+
+    double sources[n_glimmers][dim];
+    uint32_t __=dim+1;
+
+    io.open("MemoriesWillNeverFade/locations.wm");
+    for(uint32_t i=0;i<n_glimmers;i++)
+    {
+        getline(io,read);
+        int16_t commas[__];
+        
+        commas[0]=-1;
+        commas[dim]=read.length();
+        uint32_t d=1;
+        uint32_t j=0;
+
+        while(d<dim)
+        {
+            if(read[j]==',')
+            {
+                commas[d]=j;
+                
+                d++;
+            }
+            j++;
         }
-        
-    }
-    for(uint8_t i=0;i<dim+1;i++){
-      string __="";
-      for(uint8_t j=commas[i]+1;j<commas[i+1];j++){
-          __+=line[j];
-          
-      }
-      observer_l[i]=stof(__);
-    }
-
-
-}
-
-io.close();
-
-
-io.open("wave.cw");
-while(getline(io,line)){
-    
-    unsigned short int commas[dim+6];
-    unsigned short int len=line.length();
-    unsigned short int in=1;
-    commas[dim+5]=len;
-    for(unsigned short int i=0;i<len;i++){
-        if(line[i]==','){
-            commas[in]=i;
-            in++;
-        }
-        
-    }
-         double source_l[dim];
-         string __="";
-         for(unsigned short int j=0;j<commas[1];j++){
-             __+=line[j];
-         }
-         source_l[0]=stof(__);
-
-
-
-     for(unsigned short int i=1;i<dim;i++){
-         __="";
-         for(unsigned short int j=commas[i]+1;j<commas[i+1];j++){
-             __+=line[j];
-         }
-         source_l[i]=stof(__);
-     }
-
-
-double r=0;
-for(unsigned short int c=0;c<dim;c++){
-    r+=pow((observer_l[c]-source_l[c]),2);
-}
-r=sqrt(r);
-        double start;
-     __="";
-    for(unsigned short int xi=commas[dim]+1 ;xi<commas[dim+1];xi++){
-        __+=line[xi];
-        
-    }
-    start=stof(__)+r/c;//r+c is delay for propogation
-    double end;
-     __="";
-    for(unsigned short int xi=commas[dim+1]+1 ;xi<commas[dim+2];xi++){
-        __+=line[xi];
-        
-    }
-    end=stof(__)+r/c;
-
- if(start<=observer_l[0]<=end){
-
-unsigned short int i=0;
-double wave[3];//amplitude, frequency, phase
-for(unsigned short int j=dim+2;j<dim+5;j++){
-
- string __;
- for(unsigned short int k=commas[j]+1;k<commas[j+1];k++){
-    __+=line[k];
- }
+       
+       for(int k=0;k<dim;k++)
+       {
+           sources[i][k]=stod(read.substr(commas[k]+1,commas[k+1]));
  
-wave[i]=stof(__);
-i++;
+       }
+    }
+    io.close();
 
+    double observers[n_observers][dim];
+    
+    io.open("MemoriesWillNeverFade/observers.wm");
+    for(uint32_t i=0;i<n_observers;i++)
+    {
+        getline(io,read);
+        int16_t commas[__];
+        commas[0]=-1;
+        commas[dim]=read.length();
+        uint32_t d=1;
+        uint32_t j=0;
 
-}
+        while(d<dim)
+        {
+            if(read[j]==',')
+            {
+                commas[d]=j;
+                
+                d++;
+            }
+            j++;
+        }
+       
+       for(int k=0;k<dim;k++)
+       {
+            observers[i][k]=stod(read.substr(commas[k]+1,commas[k+1]));
+       }
+ 
+    }
+    io.close();
 
-r_val+=wave[0]*sin(2*M_PIf64*wave[1]*(r/c-observer_l[0])+wave[2]);
+    double results[n_observers];
 
- }
-     
-}
+    for(uint32_t i=0;i<n_observers;i++)
+    {   
+        double tmp=0;
+        for(uint32_t j=0;j<n_glimmers;j++)
+        {   double r=0;
+            for(uint8_t k=0;k<dim;k++)
+            {
+                r+=pow(sources[j][k]-observers[i][k],2);
+            }
+            r=sqrt(r);
+           tmp+=wave_info[j][0]*cos(PI_2M*wave_info[j][1]*(r/c-t)+wave_info[j][2]);
 
-io.close();
-fstream res;
-res.open("result.cw");
+           
+        }
+        results[i]=tmp;
 
-res<<to_string(r_val);
-res.close();
-return 0;
+        
+    }
 
+    io.open("MemoriesWillNeverFade/result.wm");
+    for(uint32_t i=0;i<n_observers-1;i++)
+    {
+        io<<to_string(results[i])<<";";
+
+    }
+    io<<to_string(results[n_observers]);
+
+    io.close();
+    return 0;
 }
