@@ -45,7 +45,7 @@ class PhotonField(object):
         for file in files:
             file.close()
         
-        os.system("./renderer")
+        os.system("./renderer.bin")
         return np.genfromtxt("MemoriesWillNeverFade/result.wm",delimiter=";")
         
             
