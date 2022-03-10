@@ -1,10 +1,9 @@
 print("Interacting with reality...")
 import os
 import numpy as np
-
 os.system("mkdir MemoriesWillNeverFade") #For the memory of survey of learning photonics. Appreciate all inspiring me
 
-class Field(object):
+class PhotonField(object):
     def __init__(self,dim):
         if not type(dim)==int:
             raise TypeError("Number of dimensions is an integer")
