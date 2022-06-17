@@ -1,6 +1,6 @@
 # QO
 ## Wave Optic Simulator
-Light... The most exciting part of the existance... We have various models to explain the behavior of the light. One of them is Wave Optics. Wave Optics emerges, as the ray optic couldn't explain the phenomenons of interference and diffraction. Wave optic, understood by the name, explains the light as wave. Phase of the wave varies throug the time and location of the field. The QO simulates this behaviours. You can locate arbitrary light sources in the space and observe them from wherever you want. The QO has accelerated renderer. It has easyto learn python API and C++ backend. You only program easily with python and C++ handles the heavy computations.
+Light... The most exciting part of the existance... We have various models to explain the behavior of the light. One of them is Wave Optics. Wave Optics emerges, as the ray optic couldn't explain the phenomenons of interference and diffraction. Wave optic, understood by the name, explains the light as wave. Phase of the wave varies throug the time and location of the field. The QO simulates this behaviours. You can locate arbitrary light sources in the space and observe them from wherever you want. The QO has accelerated renderer. It has easy to learn python API and C++ backend. You only program easily with python and C++ handles the heavy computations.
 
 <h2>1.1 Tree</h2>
 <pre>
