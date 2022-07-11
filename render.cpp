@@ -124,7 +124,7 @@ int main()
                 r+=pow(sources[j][k]-observers[i][k],2);
             }
             r=sqrt(r);
-           tmp+=wave_info[j][0]*cos(PI_2M*wave_info[j][1]*(r/c-t)+wave_info[j][2]);
+           tmp+=wave_info[j][0]/r*cos(PI_2M*wave_info[j][1]*(r/c-t)+wave_info[j][2]);
 
            
         }
