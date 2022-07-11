@@ -1,7 +1,10 @@
 print("Interacting with reality...")
 import os
 import numpy as np
-os.system("mkdir MemoriesWillNeverFade") #For the memory of survey of learning photonics. Appreciate all inspiring me
+try:
+    os.system("mkdir MemoriesWillNeverFade") #For the memory of survey of learning photonics. Appreciate all inspiring me
+except:
+    pass
 
 class PhotonField(object):
     def __init__(self,dim):
