@@ -1,10 +1,11 @@
 print("Interacting with reality...")
 import os
 import numpy as np
+
 try:
-    os.system("mkdir MemoriesWillNeverFade") #For the memory of survey of learning photonics. Appreciate all inspiring me
+	os.system("mkdir MemoriesWillNeverFade") #For the memory of survey of learning photonics. Appreciate all inspiring me
 except:
-    pass
+	pass
 
 class PhotonField(object):
     def __init__(self,dim):
@@ -34,7 +35,7 @@ class PhotonField(object):
                 
         else:
             locations=np.array((locations,))
-            
+        self.__clear_file()
         np.savetxt("MemoriesWillNeverFade/observers.wm",locations , delimiter=",")  
         files=(open("MemoriesWillNeverFade/meta.wm","w"),open("MemoriesWillNeverFade/locations.wm","w"),open("MemoriesWillNeverFade/amplitudes.wm","w"),open("MemoriesWillNeverFade/frequencies.wm","w"),open("MemoriesWillNeverFade/phases.wm","w"),open("MemoriesWillNeverFade/result.wm","w"))
         files[0].write(str(self.__dim)+"\n"+str(len(self.__shinies))+"\n"+str(moment)+"\n"+str(locations.shape[0]))
@@ -50,6 +51,11 @@ class PhotonField(object):
         
         os.system("./renderer.bin")
         return np.genfromtxt("MemoriesWillNeverFade/result.wm",delimiter=";")
+    
+    def __clear_file(self):
+        file=open("MemoriesWillNeverFade/result.wm","w")
+        file.write("")
+        file.close()
         
             
 
